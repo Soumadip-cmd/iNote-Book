@@ -1,0 +1,1 @@
+color-background-for-logo[INoteBook]: rgb(0, 47, 47);
