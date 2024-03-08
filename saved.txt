@@ -1,1 +1,3 @@
 color-background-for-logo[INoteBook]: rgb(0, 47, 47);
+db-password:santra-iNotebook;
+db-username2:soumadip-2

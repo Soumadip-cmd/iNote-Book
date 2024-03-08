@@ -3,7 +3,7 @@ const path = require("path");
 const mongodbtoConnect = require("./database.js");
 mongodbtoConnect();
 
-const port = 9010;
+const port = 8000;
 const app = express();
 
 app.use(require(path.join(__dirname, "routes/browse.js")));

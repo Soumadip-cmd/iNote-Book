@@ -7,34 +7,36 @@ import Yournotes from "./components/js/Yournotes";
 import Addnotes from "./components/js/Addnotes";
 import Login from "./components/js/Login";
 import Signup from "./components/js/Signup";
+import DataState from "./context/DataState"
 
 function App() {
-  
   return (
     <>
-      <Router>
-        <Navbar />
-        <Switch>
-          <Route exact path="/about">
-            <About />
-          </Route>
-          <Route exact path="/yournotes">
-            <Yournotes />
-          </Route>
-          <Route exact path="/addnotes">
-            <Addnotes />
-          </Route>
-          <Route exact path="/">
-            <Login/>
-          </Route>
-          <Route exact path="/login">
-            <Login/>
-          </Route>
-          <Route exact path="/signUp">
-            <Signup/>
-          </Route>
-        </Switch>
-      </Router>
+      <DataState>
+        <Router>
+          <Navbar />
+          <Switch>
+            <Route exact path="/about">
+              <About />
+            </Route>
+            <Route exact path="/yournotes">
+              <Yournotes />
+            </Route>
+            <Route exact path="/addnotes">
+              <Addnotes />
+            </Route>
+            <Route exact path="/">
+              <Login />
+            </Route>
+            <Route exact path="/login">
+              <Login />
+            </Route>
+            <Route exact path="/signUp">
+              <Signup />
+            </Route>
+          </Switch>
+        </Router>
+      </DataState>
     </>
   );
 }
