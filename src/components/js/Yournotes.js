@@ -1,10 +1,8 @@
-import React, { useContext } from "react";
-import DataContext from "../../context/DataContext";
+import React from "react";
 import "../css/Yournotes.css";
+import NoteMap from "./NoteMap";
 
 export default function Yournotes() {
-  const b = useContext(DataContext);
-
   return (
     <div>
       <h3
@@ -15,10 +13,7 @@ export default function Yournotes() {
       </h3>
       <br />
       <br />
-      <div className="container note-special my-3 p-3">
-        <h2 className="text-center mb-5" style={{color:"#820300"}}><b>{b.fetchnote_data[0].title}</b></h2>
-        <p>{b.fetchnote_data[0].description}</p>
-      </div>
+      <NoteMap />
     </div>
   );
 }

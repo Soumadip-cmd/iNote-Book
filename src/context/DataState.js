@@ -1,28 +1,139 @@
+import { useState } from "react";
 import DataContext from "./DataContext";
 
-const DataState=(props)=>{
-    
-    const fetchnote_data=[
-        {
-          "_id": "65e429b6c397aed90a0a35be",
-          "user": "65e42974c397aed90a0a35b9",
-          "title": "Hello World",
-          "description": "This is hello world program written in C",
-          "tag": "general",
-          "date": "2024-03-03T07:41:42.554Z",
-          "__v": 0
-        }
-        
-      ]
-    
-    
-    return(
-        <DataContext.Provider value={{fetchnote_data}}>
-            {props.children}
-        </DataContext.Provider>
-        
-    )
-    
-}
+const DataState = (props) => {
+  const fetchnote_data = []
+  
+  const [notes, setNotes] = useState(fetchnote_data);
 
-export default DataState
+  //get all note
+  const getNote=async()=>{
+    const url = "http://localhost:8000/note";
+    const response = await fetch(url, {
+      method: "GET",
+
+      headers: {
+        "Content-Type": "application/json",
+        "auth-token":
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjVlZGFiMTAxMTJhNzdiNzlmZjRhZDYzIn0sImlhdCI6MTcxMDA3NDY3Nn0.N0Jj5oD-vaTFxOrAgLx8fABTr5wmnzpyitBgjKei3EE",
+      },
+      
+      
+    });
+    // return response.json();
+    const json=await response.json()
+    // console.log(response.json());---> this is wrong as we cant use await here..
+    console.log(json);
+    setNotes(json)
+    
+  }
+
+  //add note
+
+  const addNote = async (title, description, tag) => {
+    //add api call
+    //for converted into string->this portion imp...(line:35,36,37)
+    title = Array.isArray(title) ? title[0] : title;
+    description = Array.isArray(description) ? description[0] : description;
+    tag = Array.isArray(tag) ? tag[0] : tag;
+
+    const url = "http://localhost:8000/addnote";
+    const response = await fetch(url, {
+      method: "POST",
+
+      headers: {
+        "Content-Type": "application/json",
+        "auth-token":
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjVlZGFiMTAxMTJhNzdiNzlmZjRhZDYzIn0sImlhdCI6MTcxMDA3NDY3Nn0.N0Jj5oD-vaTFxOrAgLx8fABTr5wmnzpyitBgjKei3EE",
+      },
+      
+      body: JSON.stringify({ title, description, tag }),
+    });
+    // return response.json();
+    const json=await response.json()
+    console.log(json)
+    //fetch note(add)
+    const notedata = {
+      "_id": "65edabb7112a77b79ff4ad6b",
+      "user": "65edab10112a77b79ff4ad63",
+      "title": title,
+      "description": description,
+      "tag": tag,
+      "date": "2024-03-10T12:45:52.838Z",
+      "__v": 0
+    };
+    setNotes(notes.concat(notedata));
+  };
+
+  //delete note
+  const deleteNote = async (id) => {
+    //delete api call
+    const url = `http://localhost:8000/deletenote/${id}`;
+    const response = await fetch(url, {
+      method: "DELETE",
+
+      headers: {
+        
+        "auth-token":
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjVlZGFiMTAxMTJhNzdiNzlmZjRhZDYzIn0sImlhdCI6MTcxMDA3NDY3Nn0.N0Jj5oD-vaTFxOrAgLx8fABTr5wmnzpyitBgjKei3EE",
+      },
+     
+      
+    });
+    // return response.json();
+    const json=await response.json()
+    // console.log(json)
+    //fetch note(delete)
+    const delNote = notes.filter((note) => {
+      return note._id !== id;
+    });
+    setNotes(delNote);
+    
+  };
+
+  //edit note
+  const editNote = async (id, title, description, tag) => {
+    // edit api call
+    const url = `http://localhost:8000/updatenote/${id}`;
+    
+    //for converted into string->this portion imp...(line:97,98,99)
+    title = Array.isArray(title) ? title[0] : title;
+    description = Array.isArray(description) ? description[0] : description;
+    tag = Array.isArray(tag) ? tag[0] : tag;
+    const response = await fetch(url, {
+      method: "PUT",
+
+      headers: {
+        "Content-Type": "application/json",
+        "auth-token":
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjVlZGFiMTAxMTJhNzdiNzlmZjRhZDYzIn0sImlhdCI6MTcxMDA3NDY3Nn0.N0Jj5oD-vaTFxOrAgLx8fABTr5wmnzpyitBgjKei3EE",
+      },
+      
+      body: JSON.stringify({title, description, tag }),
+    });
+    // return response.json();
+    const json=await response.json()
+    console.log(json)
+
+    //fetch note(edit)
+    const notetoString=JSON.parse(JSON.stringify(notes))
+    for (let index = 0; index < notetoString.length; index++) {
+      const element = notetoString[index];
+      if (element._id === id) {
+        notetoString[index].title = title;
+        notetoString[index].description = description;
+        notetoString[index].tag = tag;
+        break;
+      }
+      
+    }
+    setNotes(notetoString)
+  };
+  return (
+    <DataContext.Provider value={{ notes, addNote, deleteNote, editNote ,getNote}}>
+      {props.children}
+    </DataContext.Provider>
+  );
+};
+
+export default DataState;

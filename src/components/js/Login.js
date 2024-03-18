@@ -9,47 +9,47 @@ export default function Login() {
       </div>
       <div className="bodyspecial">
         <div className="container my-5">
-          <div class="container my-4 login-bg">
-            <div class="row featurette mx-3 d-flex justify-content-center align-items-center pb-3">
-              <div class="col-md-5 order-md-1">
+          <div className="container my-4 login-bg">
+            <div className="row featurette mx-3 d-flex justify-content-center align-items-center pb-3">
+              <div className="col-md-5 order-md-1">
                 <img
-                  class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto rounded float-end"
+                  className="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto rounded float-end"
                   src="logo-bright.png"
                   alt="ff"
                 />
               </div>
-              <div class="col-md-7 order-md-2 ">
+              <div className="col-md-7 order-md-2 ">
                 <form>
-                  <div class="form-group">
-                    <label for="exampleInputEmail1">Email address</label>
+                  <div className="form-group">
+                    <label htmlFor="exampleInputEmail1">Email address</label>
                     <input
                       type="email"
-                      class="form-control"
+                      className="form-control"
                       id="exampleInputEmail1"
                       aria-describedby="emailHelp"
                       placeholder="name@email.com"
                       style={{ fontWeight: "600", fontSize: "20px" }}
                     />
                   </div>
-                  <div class="form-group">
+                  <div className="form-group">
                     <label
-                      for="exampleInputPassword1"
+                      htmlFor="exampleInputPassword1"
                       style={{ fontWeight: "600", fontSize: "20px" }}
                     >
                       Password
                     </label>
                     <input
                       type="password"
-                      class="form-control"
+                      className="form-control"
                       id="exampleInputPassword1"
                     />
                   </div>
                   <div className="footer-setup">
-                    <div class="form-group form-check">
-                      <input type="checkbox" class="mx-2" id="exampleCheck1" />
+                    <div className="form-group form-check">
+                      <input type="checkbox" className="mx-2" id="exampleCheck1" />
                       <label
-                        class=""
-                        for="exampleCheck1"
+                        className=""
+                        htmlFor="exampleCheck1"
                         style={{ fontSize: "18px" }}
                       >
                         {" "}
@@ -58,7 +58,7 @@ export default function Login() {
                     </div>
                     <button
                       type="submit"
-                      class="btn btn-primary px-4 py-1"
+                      className="btn btn-primary px-4 py-1"
                       style={{ height: "72%" }}
                     >
                       Login
