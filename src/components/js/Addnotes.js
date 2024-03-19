@@ -1,5 +1,6 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import DataContext from "../../context/DataContext";
+import { useHistory } from "react-router-dom"
 
 export default function Addnotes() {
   const context=useContext(DataContext)
@@ -17,6 +18,14 @@ export default function Addnotes() {
   const changing=(e)=>{
       setNotes({...notedata,[e.target.name]:[e.target.value]})
   }
+  let history=useHistory() 
+  useEffect(() => {
+    if(!(localStorage.getItem('Auth-Token')))
+    {
+      history.push('/login')
+    }
+    // eslint-disable-next-line
+  }, []);
   return (
     <>
       <div className="container my-4">
