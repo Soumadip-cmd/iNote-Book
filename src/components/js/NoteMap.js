@@ -1,12 +1,20 @@
 import React, { useContext, useEffect, useRef,useState } from "react";
 import DataContext from "../../context/DataContext";
 import Notes from "./Notes";
+import { useHistory } from "react-router-dom";
 
 const NoteMap = () => {
   const b = useContext(DataContext);
   const { notes, getNote,editNote } = b;
+  let history=useHistory()
   useEffect(() => {
-    getNote();
+    if(localStorage.getItem('Auth-Token'))
+    {
+      getNote()
+    }
+    else{
+      history.push('/login')
+    }
     // eslint-disable-next-line
   }, []);
   const [notedata,setNotes]=useState({id:"",edit_title:"",edit_description:"",edit_tag:""})
