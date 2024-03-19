@@ -1,7 +1,60 @@
-import React from "react";
+import React, { useState } from "react";
 import "../css/signup.css";
 import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 const Signup = () => {
+
+  const [signup, setSignup] = useState({ name: "", email: "", password: "", cpassword: "" })
+
+  let history = useHistory()
+
+  const submit = async (e) => {
+    e.preventDefault()
+
+    let { name, password, email } = signup;
+
+    name = Array.isArray(name) ? name[0] : name;
+    password = Array.isArray(password) ? password[0] : password;
+    email = Array.isArray(email) ? email[0] : email;
+
+    const url = "http://localhost:8000/create";
+    const response = await fetch(url, {
+      method: "POST",
+
+      headers: {
+        "Content-Type": "application/json",
+
+      },
+
+      body: JSON.stringify({ name, password, email }),
+    });
+    let answer = await response.json()
+    if (answer.Success) {
+      // console.log(answer)
+      localStorage.setItem('iNote-Book[Tag]:', answer.token)
+      history.push('/addnotes')
+    }
+    else {
+      alert('Invalid Credentials..')
+    }
+  }
+  const changing = (e) => {
+
+    setSignup({ ...signup, [e.target.name]: [e.target.value] })
+  }
+  const passfetch = (e) => {
+    let pass = document.getElementById('password').value
+    let confirmPass = document.getElementById('cpassword').value
+    if (pass !== confirmPass) {
+      document.getElementById('wrong').innerText = "Password not Matched"
+      document.getElementById('wrong').style = "color:red"
+    }
+    else {
+      document.getElementById('wrong').innerHTML = 'Password Matched'
+      document.getElementById('wrong').style = "color:green"
+    }
+    setSignup({ ...signup, [e.target.name]: [e.target.value] })
+  }
   return (
     <>
       <div className="container bodyspecial d-flex justify-content-center top-style">
@@ -19,18 +72,7 @@ const Signup = () => {
                 />
               </div>
               <div className="col-md-7 order-md-2 ">
-                <form>
-                  <div className="form-group">
-                    <label htmlFor="exampleInputEmail1">Email address</label>
-                    <input
-                      type="email"
-                      className="form-control"
-                      id="exampleInputEmail1"
-                      aria-describedby="emailHelp"
-                      placeholder="name@email.com"
-                      style={{ fontWeight: "600", fontSize: "18px" }}
-                    />
-                  </div>
+                <form onSubmit={submit}>
                   <div className="form-group">
                     <label htmlFor="exampleInputName">Name</label>
                     <input
@@ -39,7 +81,18 @@ const Signup = () => {
                       id="exampleInputName"
                       aria-describedby="emailHelp"
                       placeholder="William Smith"
-                      style={{ fontWeight: "600", fontSize: "18px" }}
+                      style={{ fontWeight: "600", fontSize: "18px" }} name="name" value={signup.name} onChange={changing} required
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="exampleInputEmail1">Email address</label>
+                    <input
+                      type="email"
+                      className="form-control"
+                      id="exampleInputEmail1"
+                      aria-describedby="emailHelp"
+                      placeholder="name@email.com"
+                      style={{ fontWeight: "600", fontSize: "18px" }} name="email" value={signup.email} onChange={changing} required
                     />
                   </div>
                   <div className="form-group">
@@ -47,18 +100,18 @@ const Signup = () => {
                     <input
                       type="password"
                       className="form-control"
-                      id="exampleInputPassword1"
-                      style={{ fontWeight: "600", fontSize: "18px" }}
+                      id="password"
+                      style={{ fontWeight: "600", fontSize: "18px" }} name="password" value={signup.password} onChange={changing} required
                     />
                   </div>
                   <div className="form-group">
-                    <label htmlFor="exampleInputPassword1">Confirm Password</label>
+                    <label htmlFor="exampleInputPassword2">Confirm Password</label>
                     <input
                       type="password"
                       className="form-control"
-                      id="exampleInputPassword1"
-                      style={{ fontWeight: "600", fontSize: "18px" }}
-                    />
+                      id="cpassword"
+                      style={{ fontWeight: "600", fontSize: "18px" }} name="cpassword" value={signup.cpassword} onChange={passfetch} required
+                    /><p className="my-1" style={{ color: 'red', fontSize: "16px" }}><i id="wrong"></i></p>
                   </div>
                   <div className="container d-flex justify-content-center my-3">
                     <button

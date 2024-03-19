@@ -26,12 +26,14 @@ router.post(
   ],
   async (req, res) => {
     // error finding in user login
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(404).json({ errors: errors.array() });
-    }
-    //try cathch under user authetication
+    let success=false//here declare success not inside try!!!
+
     try {
+      const errors = validationResult(req);
+      if (!errors.isEmpty()) {
+        return res.status(404).json({ Success:success,errors: errors.array() });
+      }
+      //try cathch under user authetication
       //salting & hashing password
       const salt = await bcrypt.genSalt(10);
       const secPass = await bcrypt.hash(req.body.password, salt);
@@ -43,18 +45,18 @@ router.post(
         // .then(user => res.json(user))
         .catch((err) => {
           console.log(err);
-          res.json({ error: "Enter a unique valid email." });
+          res.json({ Success:success,error: "Enter a unique valid email." });
         });
 
       const data = {
         id: User.id,
       };
-
+      success=true
       const authToken = jwt.sign(data, JWT_SECRET);
-      res.json({ authToken });
+      res.json({ Success:success,token:authToken });
     } catch (error) {
       console.error(error.message);
-      res.status(500).send("Some error occured");
+      res.status(500).json({Success:success,error:"Some error occured"});
     }
   }
 );
@@ -69,9 +71,11 @@ router.post(
     }),
   ],
   async (req, res) => {
+    let success = true
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
+      success = false
+      return res.status(400).json({ Success: success, errors: errors.array() });
     }
 
     const { email, password } = req.body;
@@ -81,21 +85,23 @@ router.post(
       let user = await User.findOne({ email });
       // console.log(user);
       if (!user) {
-        res.status(400).json({ error: "Login Failed." });
+        success = false
+        res.status(400).json({ Success: success, error: "Login Failed." });
       }
       let pass = await bcrypt.compare(password, user.password);
 
       if (!pass) {
-        res.status(404).json({ error: "Login Failed." });
+        success = false
+        res.status(404).json({ Success: success, error: "Login Failed." });
       }
       const data = {
         user: {
           id: user.id,
         },
       };
-
+      success = true
       const token = jwt.sign(data, JWT_SECRET);
-      res.json({ Tag_Number: token });
+      res.json({ Success: success, Tag_Number: token });//must do this json as you can take object type in fetching login ---->(json.Success) or (json.Tag_Number)
     } catch (error) {
       console.error(error.message);
       res.status(505).send("Some error occured");

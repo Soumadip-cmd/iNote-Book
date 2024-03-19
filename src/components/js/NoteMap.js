@@ -21,7 +21,7 @@ const NoteMap = () => {
   
   const btn_click=(e)=>{
     // e.preventdefault()
-    console.log('updated note->',notedata)
+    // console.log('updated note->',notedata)
     editNote(notedata.id,notedata.edit_title,notedata.edit_description,notedata.edit_tag)
     
     refClose.current.click()

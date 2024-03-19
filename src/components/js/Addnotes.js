@@ -23,7 +23,7 @@ export default function Addnotes() {
         <div className="mb-3">
         <h2 className="txt">--Write Your Note~~</h2>
           Title:
-          <input type="text" className="form-control size" style={{ fontSize: "21px", fontWeight: "bold"}} placeholder="Write a Title" onChange={changing} name="title"/><br/>
+          <input type="text" className="form-control size" style={{ fontSize: "21px", fontWeight: "bold"}} placeholder="Write a Title" onChange={changing} name="title" required value={notedata.title}/><br/>
           <label htmlFor="exampleFormControlTextarea1" className="form-label">
             
           </label>
@@ -33,10 +33,10 @@ export default function Addnotes() {
             id="notes"
             rows="7"
             placeholder="Enter Your Text --"
-            style={{ fontSize: "21px", fontWeight: "bold" }} onChange={changing} name="description"
+            style={{ fontSize: "21px", fontWeight: "bold" }} onChange={changing} name="description" required value={notedata.description} minLength={3}
           ></textarea>
           <br/>
-          <select className="form-control size" style={{ fontSize: "21px", fontWeight: "bold",color:"black" }} onChange={changing} name="tag" >
+          <select className="form-control size" style={{ fontSize: "21px", fontWeight: "bold",color:"black" }} onChange={changing}  minLength={5} name="tag" required>
           {/* where you want to change there you write the name as take addNote=(e.g1,e.g2,...e.gn)= 
           so that for above example name="e.g1" or name="e.g2" or ...*/}
             <option disabled selected value={""} >--Choose Tag--</option>
@@ -46,7 +46,7 @@ export default function Addnotes() {
           </select>
           
           <div className="mx-3 my-3">
-            <button type="button" className="btn btn-primary mx-2" onClick={btn_click}>
+            <button type="button" className="btn btn-primary mx-2" onClick={btn_click} >
               Add Note
             </button>
             <button

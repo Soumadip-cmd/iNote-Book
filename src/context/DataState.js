@@ -23,7 +23,7 @@ const DataState = (props) => {
     // return response.json();
     const json=await response.json()
     // console.log(response.json());---> this is wrong as we cant use await here..
-    console.log(json);
+    // console.log(json);
     setNotes(json)
     
   }
@@ -51,18 +51,10 @@ const DataState = (props) => {
     });
     // return response.json();
     const json=await response.json()
-    console.log(json)
+    
     //fetch note(add)
-    const notedata = {
-      "_id": "65edabb7112a77b79ff4ad6b",
-      "user": "65edab10112a77b79ff4ad63",
-      "title": title,
-      "description": description,
-      "tag": tag,
-      "date": "2024-03-10T12:45:52.838Z",
-      "__v": 0
-    };
-    setNotes(notes.concat(notedata));
+   
+    setNotes(notes.concat(json));
   };
 
   //delete note
@@ -113,7 +105,7 @@ const DataState = (props) => {
     });
     // return response.json();
     const json=await response.json()
-    console.log(json)
+    
 
     //fetch note(edit)
     const notetoString=JSON.parse(JSON.stringify(notes))

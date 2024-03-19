@@ -1,11 +1,50 @@
-import React from "react";
+import React, { useState } from "react";
 import "../css/Login.css";
 import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 export default function Login() {
+
+  const [login,setLogin]=useState({email:"",password:""})
+
+  //for redirecting 
+  
+  let history=useHistory()
+  const submit = async (e) => {
+    e.preventDefault();
+    let email = Array.isArray(login.email) ? login.email[0] : login.email;
+    let password = Array.isArray(login.password) ? login.password[0] : login.password;
+    const url = "http://localhost:8000/login";
+    const response = await fetch(url, {
+
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email:email, password:password }),
+
+    });
+    const json = await response.json();
+    // console.log(json.Tag_Number);
+    if(json.Success)
+    {
+      //save the auth-token and redirect to yournote page
+      localStorage.setItem("Auth-Token",json.Tag_Number)
+      history.push('/yournotes')
+    }
+    else{
+      alert('Login Failed..')
+      
+    }
+  };
+
+  const changing=(e)=>{
+    setLogin({...login,[e.target.name]:[e.target.value]})
+  }
+
   return (
     <>
       <div className="container bodyspecial d-flex justify-content-center top-style">
-        <i>Login to continue using iNote-Book~~{" "}</i>
+        <i>Login to continue using iNote-Book~~</i>
       </div>
       <div className="bodyspecial">
         <div className="container my-5">
@@ -19,7 +58,7 @@ export default function Login() {
                 />
               </div>
               <div className="col-md-7 order-md-2 ">
-                <form>
+                <form onSubmit={submit}>
                   <div className="form-group">
                     <label htmlFor="exampleInputEmail1">Email address</label>
                     <input
@@ -28,7 +67,7 @@ export default function Login() {
                       id="exampleInputEmail1"
                       aria-describedby="emailHelp"
                       placeholder="name@email.com"
-                      style={{ fontWeight: "600", fontSize: "20px" }}
+                      style={{ fontWeight: "600", fontSize: "20px" }} onChange={changing} name="email" value={login.email} required
                     />
                   </div>
                   <div className="form-group">
@@ -41,12 +80,16 @@ export default function Login() {
                     <input
                       type="password"
                       className="form-control"
-                      id="exampleInputPassword1"
+                      id="exampleInputPassword1" onChange={changing} name="password" value={login.password} required
                     />
                   </div>
                   <div className="footer-setup">
                     <div className="form-group form-check">
-                      <input type="checkbox" className="mx-2" id="exampleCheck1" />
+                      <input
+                        type="checkbox"
+                        className="mx-2"
+                        id="exampleCheck1"
+                      />
                       <label
                         className=""
                         htmlFor="exampleCheck1"
