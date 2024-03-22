@@ -59,7 +59,7 @@ export default function Login() {
                 <img
                   className="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto rounded float-end"
                   src="logo-bright.png"
-                  alt="ff"
+                  alt="logo image"
                 />
               </div>
               <div className="col-md-7 order-md-2 ">
