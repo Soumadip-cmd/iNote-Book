@@ -1,6 +1,6 @@
 import { useState } from "react";
 import AlertContext from "./AlertContext";
-import Alert from "../../components/js/Alert";
+
 
 const  AlertState=(props)=>{
     const [alert,setAlert]=useState(null)

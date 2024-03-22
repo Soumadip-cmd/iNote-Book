@@ -71,9 +71,9 @@ const Signup = () => {
             <div className="row featurette mx-3 d-flex justify-content-center align-items-center pb-3">
               <div className="col-md-5 order-md-1">
                 <img
-                  className="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto rounded float-end"
-                  src="logo-bright.png"
-                  alt="ff"
+                  className="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto rounded "
+                  src="https://ktar.com/wp-content/uploads/2021/10/notebook-pen-unsplash.jpg"
+                  alt=" " 
                 />
               </div>
               <div className="col-md-7 order-md-2 ">

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import "./App.css";
 import Navbar from "./components/js/Navbar";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
@@ -8,7 +8,7 @@ import Addnotes from "./components/js/Addnotes";
 import Login from "./components/js/Login";
 import Signup from "./components/js/Signup";
 import DataState from "./context/DataState";
-import Alert from "./components/js/Alert";
+
 import AlertState from "./context/Alert/AlertState";
 
 function App() {
@@ -31,6 +31,9 @@ function App() {
                 <Addnotes />
               </Route>
               <Route exact path="/">
+                <Login />
+              </Route>
+              <Route exact path="/iNote-Book">
                 <Login />
               </Route>
               <Route exact path="/login">

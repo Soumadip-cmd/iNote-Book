@@ -73,6 +73,7 @@ const DataState = (props) => {
       
     });
     // return response.json();
+    // eslint-disable-next-line
     const json=await response.json()
     // console.log(json)
     //fetch note(delete)
@@ -104,6 +105,7 @@ const DataState = (props) => {
       body: JSON.stringify({title, description, tag }),
     });
     // return response.json();
+    // eslint-disable-next-line
     const json=await response.json()
     
 
