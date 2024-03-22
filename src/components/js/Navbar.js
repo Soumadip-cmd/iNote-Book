@@ -9,13 +9,14 @@ const Navbar = () => {
   React.useEffect(() => {
     // console.log(location.pathname)
   });
+  const {alert,showAlert}=useContext(AlertContext)
 
   let history=useHistory()
   const logOut=()=>{
     localStorage.removeItem('Auth-Token')
     history.push('/login')
+    showAlert('info','LogOut Successfully..')
   }
-  const {alert}=useContext(AlertContext)
   return (
     <>
       <nav className="navbar navbar-expand-lg navbar-light nav_special" style={{ backgroundColor: "rgb(80 196 237 / 64%)", fontWeight: "800" }}>
