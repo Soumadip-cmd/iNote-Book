@@ -10,6 +10,9 @@ const  AlertState=(props)=>{
             type:type,
             msg:message
         })
+        setTimeout(() => {
+            setAlert(null)
+        }, 1700);
     }
     
     
