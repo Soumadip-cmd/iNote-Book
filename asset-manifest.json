@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/iNote-Book/static/css/main.dd6692e1.css",
-    "main.js": "/iNote-Book/static/js/main.f86dcdc9.js",
+    "main.js": "/iNote-Book/static/js/main.dd214ff3.js",
     "static/js/453.b194b481.chunk.js": "/iNote-Book/static/js/453.b194b481.chunk.js",
     "static/media/iNoteBook-Background.png": "/iNote-Book/static/media/iNoteBook-Background.0d6142b7b43f2109b45a.png",
     "index.html": "/iNote-Book/index.html",
     "main.dd6692e1.css.map": "/iNote-Book/static/css/main.dd6692e1.css.map",
-    "main.f86dcdc9.js.map": "/iNote-Book/static/js/main.f86dcdc9.js.map",
+    "main.dd214ff3.js.map": "/iNote-Book/static/js/main.dd214ff3.js.map",
     "453.b194b481.chunk.js.map": "/iNote-Book/static/js/453.b194b481.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.dd6692e1.css",
-    "static/js/main.f86dcdc9.js"
+    "static/js/main.dd214ff3.js"
   ]
 }
