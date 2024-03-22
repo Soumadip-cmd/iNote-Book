@@ -2,10 +2,15 @@ import React, { useContext, useEffect, useRef,useState } from "react";
 import DataContext from "../../context/DataContext";
 import Notes from "./Notes";
 import { useHistory } from "react-router-dom";
+import AlertContext from "../../context/Alert/AlertContext";
 
 const NoteMap = () => {
   const b = useContext(DataContext);
   const { notes, getNote,editNote } = b;
+
+  //alert ---->
+  const {showAlert}=useContext(AlertContext)
+  
   let history=useHistory()
   useEffect(() => {
     if(localStorage.getItem('Auth-Token'))
@@ -33,6 +38,7 @@ const NoteMap = () => {
     editNote(notedata.id,notedata.edit_title,notedata.edit_description,notedata.edit_tag)
     
     refClose.current.click()
+    showAlert('success','Note is Updated Successfully..')
   }
   const changing=(e)=>{
       setNotes({...notedata,[e.target.name]:[e.target.value]})

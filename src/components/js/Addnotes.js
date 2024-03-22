@@ -1,19 +1,27 @@
 import React, { useContext, useEffect, useState } from "react";
 import DataContext from "../../context/DataContext";
 import { useHistory } from "react-router-dom"
+import AlertContext from "../../context/Alert/AlertContext";
+
 
 export default function Addnotes() {
+  
   const context=useContext(DataContext)
   const {addNote}=context
   const [notedata,setNotes]=useState({title:"",description:"",tag:""})
+  //alert---->
+  const {showAlert}=useContext(AlertContext)
   function clr() {
     document.getElementById("notes").value = "";
+    showAlert('success','Text Cleared..')
   }
   const btn_click=(e)=>{
     // e.preventdefault()
     addNote(notedata.title,notedata.description,notedata.tag)
+    showAlert('success','Note is added on your DataBase..')
     
     setNotes({title: "", description: "", tag: ""})
+    
   }
   const changing=(e)=>{
       setNotes({...notedata,[e.target.name]:[e.target.value]})
@@ -28,6 +36,7 @@ export default function Addnotes() {
   }, []);
   return (
     <>
+   
       <div className="container my-4">
         <div className="mb-3">
         <h2 className="txt">--Write Your Note~~</h2>
@@ -60,8 +69,9 @@ export default function Addnotes() {
             </button>
             <button
               type="button"
-              className="btn btn-primary mx-1"
+              className="btn btn-primary mx-1 "
               onClick={clr}
+              
             >
               Clear Text
             </button>

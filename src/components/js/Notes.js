@@ -1,13 +1,26 @@
 import React, { useContext } from "react";
 import DataContext from "../../context/DataContext";
+import AlertContext from "../../context/Alert/AlertContext";
 
 const Notes = (props) => {
   const { note ,updateNOTE} = props;
   const context=useContext(DataContext)
   const {deleteNote}=context;
 
+  //alert---->
+  const {showAlert}=useContext(AlertContext)
+
   const del=()=>{
-    deleteNote(note._id)
+    let sure=window.confirm('You Sure Want to delete the note?.')
+    if(sure)
+    {
+      deleteNote(note._id)
+      showAlert('primary','Your note is deleted Successfully')
+    }
+    else{
+      showAlert('secondary','Cancel Deletion Operation...')
+
+    }
   }
   return (
     <div>

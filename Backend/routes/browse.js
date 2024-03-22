@@ -28,11 +28,11 @@ router.post(
     // error finding in user login
     let success=false//here declare success not inside try!!!
 
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(404).json({ Success:success,errors: errors.array() });
+    }
     try {
-      const errors = validationResult(req);
-      if (!errors.isEmpty()) {
-        return res.status(404).json({ Success:success,errors: errors.array() });
-      }
       //try cathch under user authetication
       //salting & hashing password
       const salt = await bcrypt.genSalt(10);
@@ -72,16 +72,16 @@ router.post(
   ],
   async (req, res) => {
     let success = true
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      success = false
-      return res.status(400).json({ Success: success, errors: errors.array() });
-    }
-
-    const { email, password } = req.body;
-    //body("email")&  body("password") must be same with req.body
-    //and body("email")&  body("password") is also must be same with user.create ->object type (password & email) name wise and also vary with body("email").isEmail(), body("password").isLength({ min: 5 }), body("name").isLength({ min: 3 }),of    '/create' page
+    
     try {
+      const errors = validationResult(req);
+      if (!errors.isEmpty()) {
+        success = false
+        return res.status(400).json({ Success: success, errors: errors.array() });
+      }
+      const { email, password } = req.body;
+      //body("email")&  body("password") must be same with req.body
+      //and body("email")&  body("password") is also must be same with user.create ->object type (password & email) name wise and also vary with body("email").isEmail(), body("password").isLength({ min: 5 }), body("name").isLength({ min: 3 }),of    '/create' page
       let user = await User.findOne({ email });
       // console.log(user);
       if (!user) {

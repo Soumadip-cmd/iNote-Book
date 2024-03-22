@@ -1,12 +1,16 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "../css/signup.css";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
+import AlertContext from "../../context/Alert/AlertContext";
 const Signup = () => {
 
   const [signup, setSignup] = useState({ name: "", email: "", password: "", cpassword: "" })
 
   let history = useHistory()
+
+  // Alert -->
+  const {showAlert}=useContext(AlertContext)
 
   const submit = async (e) => {
     e.preventDefault()
@@ -33,9 +37,10 @@ const Signup = () => {
       // console.log(answer)
       localStorage.setItem('iNote-Book[Tag]:', answer.token)
       history.push('/addnotes')
+      showAlert('success','Successfully Sign In..')
     }
     else {
-      alert('Invalid Credentials..')
+      showAlert('warning','Invalid Credentials!..Check Again..')
     }
   }
   const changing = (e) => {

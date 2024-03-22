@@ -1,48 +1,53 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "../css/Login.css";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
+
+import Alert from "./Alert";
+import AlertContext from "../../context/Alert/AlertContext";
 export default function Login() {
+  const [login, setLogin] = useState({ email: "", password: "" });
+  const {showAlert}=useContext(AlertContext)
+  //for redirecting
 
-  const [login,setLogin]=useState({email:"",password:""})
-
-  //for redirecting 
-  
-  let history=useHistory()
+  let history = useHistory();
   const submit = async (e) => {
     e.preventDefault();
     let email = Array.isArray(login.email) ? login.email[0] : login.email;
-    let password = Array.isArray(login.password) ? login.password[0] : login.password;
+    let password = Array.isArray(login.password)
+      ? login.password[0]
+      : login.password;
     const url = "http://localhost:8000/login";
     const response = await fetch(url, {
-
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ email:email, password:password }),
-
+      body: JSON.stringify({ email: email, password: password }),
     });
     const json = await response.json();
     // console.log(json.Tag_Number);
-    if(json.Success)
-    {
+    if (json.Success) {
       //save the auth-token and redirect to yournote page
-      localStorage.setItem("Auth-Token",json.Tag_Number)
-      history.push('/yournotes')
-    }
-    else{
-      alert('Login Failed..')
-      
+      localStorage.setItem("Auth-Token", json.Tag_Number);
+      history.push("/yournotes");
+      showAlert("success","Successfully Logged In..")
+    } else {
+      showAlert("danger","Login Failed!!..Check Again..")
     }
   };
 
-  const changing=(e)=>{
-    setLogin({...login,[e.target.name]:[e.target.value]})
-  }
+  const changing = (e) => {
+    setLogin({ ...login, [e.target.name]: [e.target.value] });
+  };
 
   return (
     <>
+      {/* alert set */}
+      <div>
+        {/* <Alert type="success" msg={state.name} /> */}
+      </div>
+
       <div className="container bodyspecial d-flex justify-content-center top-style">
         <i>Login to continue using iNote-Book~~</i>
       </div>
@@ -67,7 +72,11 @@ export default function Login() {
                       id="exampleInputEmail1"
                       aria-describedby="emailHelp"
                       placeholder="name@email.com"
-                      style={{ fontWeight: "600", fontSize: "20px" }} onChange={changing} name="email" value={login.email} required
+                      style={{ fontWeight: "600", fontSize: "20px" }}
+                      onChange={changing}
+                      name="email"
+                      value={login.email}
+                      required
                     />
                   </div>
                   <div className="form-group">
@@ -80,7 +89,11 @@ export default function Login() {
                     <input
                       type="password"
                       className="form-control"
-                      id="exampleInputPassword1" onChange={changing} name="password" value={login.password} required
+                      id="exampleInputPassword1"
+                      onChange={changing}
+                      name="password"
+                      value={login.password}
+                      required
                     />
                   </div>
                   <div className="footer-setup">

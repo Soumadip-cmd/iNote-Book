@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import '../css/Navbar.css';
 import { Link, useLocation,useHistory } from "react-router-dom";
+import Alert from "./Alert";
+import AlertContext from "../../context/Alert/AlertContext";
 const Navbar = () => {
 
   let location = useLocation();
@@ -13,6 +15,7 @@ const Navbar = () => {
     localStorage.removeItem('Auth-Token')
     history.push('/login')
   }
+  const {alert}=useContext(AlertContext)
   return (
     <>
       <nav className="navbar navbar-expand-lg navbar-light nav_special" style={{ backgroundColor: "rgb(80 196 237 / 64%)", fontWeight: "800" }}>
@@ -70,6 +73,7 @@ const Navbar = () => {
           }
         </div>
       </nav>
+      <Alert alert={alert}/>
     </>
   );
 };
