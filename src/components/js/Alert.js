@@ -2,7 +2,7 @@ import React from 'react';
 import "../css/Alert.css"
 
 const Alert = (props) => {
-    const { alert,height } = props;
+    const { alert } = props;
     
     
     return (
@@ -10,7 +10,7 @@ const Alert = (props) => {
         <div style={{height:`55px`}} >
         
             {alert && (
-                <div className={`alert alert-${alert.type} alert-dismissible fade show`} role="alert">
+                <div className={`alert alert-${alert.type} alert-dismissible fade show `} role="alert">
                     <strong id='caps'>{(alert.type[0].toUpperCase() + alert.type.slice(1))}: </strong>
                     {alert.msg}.
                     

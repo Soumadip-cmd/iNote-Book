@@ -33,9 +33,9 @@ function App() {
               <Route exact path="/">
                 <Login />
               </Route>
-              <Route exact path="/iNote-Book">
+              {/* <Route exact path="/iNote-Book">
                 <Login />
-              </Route>
+              </Route> */}
               <Route exact path="/login">
                 <Login />
               </Route>
