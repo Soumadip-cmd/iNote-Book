@@ -8,7 +8,9 @@ const port = 8000;
 const app = express();
  
 app.use(cors({
-  origin: ["https://i-note-book-frontend-theta.vercel.app"]
+  origin: ["https://i-note-book-frontend-theta.vercel.app"],
+  methods: ["GET","POST","PUT","DELETE"],
+  credentials:true
 }));
 
 
