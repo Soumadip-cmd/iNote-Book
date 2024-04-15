@@ -8,7 +8,7 @@ const port = 8000;
 const app = express();
  
 app.use(cors({
-  origin: 'http://localhost:3000' // Adjusted to match your frontend port
+  origin: '' // Adjusted to match your frontend port
 }));
 
 app.get('/',(req,res)=>{
