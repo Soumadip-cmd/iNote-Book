@@ -8,6 +8,9 @@ const port = 8000;
 const app = express();
  
 app.use(cors())
+app.get('/',(req,res)=>{
+  res.send('Hello')
+})
 
 app.use(require(path.join(__dirname, "routes/browse.js")));
 app.use(require(path.join(__dirname, "routes/fetchnote.js")));
