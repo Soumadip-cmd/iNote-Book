@@ -1,0 +1,26 @@
+.bodyspecial{
+    /* background-color: rgb(212, 206, 206); */
+    display: flex;
+    align-items: center;
+    /* color: white; */
+}
+.login-bg{
+    background: white;
+    border-radius: 9px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    border-top: 10px solid #2D9596;
+}
+.smallmove{
+    font-size: 14px;
+    text-align: center;
+    color: blue;
+}
+.footer-setup{
+    display: flex;
+    justify-content: space-between;
+
+}
+.top-style{
+    margin-bottom: -39px;
+    margin-top: 26px;
+}
