@@ -7,7 +7,10 @@ mongodbtoConnect();
 const port = 8000;
 const app = express();
  
-app.use(cors())
+app.use(cors({
+  origin: 'http://localhost:3000' // Adjusted to match your frontend port
+}));
+
 app.get('/',(req,res)=>{
   res.send('Hello')
 })
