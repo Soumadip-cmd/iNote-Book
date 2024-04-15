@@ -7,19 +7,11 @@ mongodbtoConnect();
 const port = 8000;
 const app = express();
  
-app.use(cors({
-  origin: ["https://i-note-book-frontend-theta.vercel.app/"],
-  methods: ["GET","POST","PUT","DELETE"],
-  credentials:true
-}));
-
-app.get("/",(req,res)=>{
-  res.send('Hello')
-})
+app.use(cors())
 
 app.use(require(path.join(__dirname, "routes/browse.js")));
 app.use(require(path.join(__dirname, "routes/fetchnote.js")));
 
-app.listen(port, () => { 
+app.listen(port, () => {
   console.log(`Port Number http://localhost:${port}`);
 });
