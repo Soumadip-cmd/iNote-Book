@@ -13,6 +13,9 @@ app.use(cors({
   credentials:true
 }));
 
+app.get("/",(req,res)=>{
+  res.send('Hello')
+})
 
 app.use(require(path.join(__dirname, "routes/browse.js")));
 app.use(require(path.join(__dirname, "routes/fetchnote.js")));
