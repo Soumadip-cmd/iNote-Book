@@ -17,7 +17,7 @@ export default function Login() {
     let password = Array.isArray(login.password)
       ? login.password[0]
       : login.password;
-    const url = "https://i-note-book-sepia.vercel.app/login";
+    const url = "http://localhost:8000/login";
     const response = await fetch(url, {
       method: "POST",
       headers: {
