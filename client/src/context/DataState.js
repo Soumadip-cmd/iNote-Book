@@ -8,7 +8,7 @@ const DataState = (props) => {
 
   //get all note
   const getNote=async()=>{
-    const url = "https://i-note-book-sepia.vercel.app/note";
+    const url = "http://localhost:8000/note";
     const response = await fetch(url, {
       method: "GET",
 
@@ -37,7 +37,7 @@ const DataState = (props) => {
     description = Array.isArray(description) ? description[0] : description;
     tag = Array.isArray(tag) ? tag[0] : tag;
 
-    const url = "https://i-note-book-sepia.vercel.app/addnote";
+    const url = "http://localhost:8000/addnote";
     const response = await fetch(url, {
       method: "POST",
 
@@ -60,7 +60,7 @@ const DataState = (props) => {
   //delete note
   const deleteNote = async (id) => {
     //delete api call
-    const url = `https://i-note-book-sepia.vercel.app/deletenote/${id}`;
+    const url = `http://localhost:8000/deletenote/${id}`;
     const response = await fetch(url, {
       method: "DELETE",
 
@@ -87,7 +87,7 @@ const DataState = (props) => {
   //edit note
   const editNote = async (id, title, description, tag) => {
     // edit api call
-    const url = `https://i-note-book-sepia.vercel.app/updatenote/${id}`;
+    const url = `http://localhost:8000/updatenote/${id}`;
     
     //for converted into string->this portion imp...(line:97,98,99)
     title = Array.isArray(title) ? title[0] : title;
