@@ -8,7 +8,7 @@ const port = 8000;
 const app = express();
  
 app.use(cors({
-  origin: 'https://i-note-book-frontend-theta.vercel.app/' // Adjusted to match your frontend port
+  origin: 'https://i-note-book-frontend-theta.vercel.app' // Adjusted to match your frontend port
 }));
 
 app.get('/',(req,res)=>{
