@@ -21,7 +21,7 @@ const Signup = () => {
     password = Array.isArray(password) ? password[0] : password;
     email = Array.isArray(email) ? email[0] : email;
 
-    const url = "http://localhost:8000/create";
+    const url = "https://inote-book-1.onrender.com/create";
     const response = await fetch(url, {
       method: "POST",
 

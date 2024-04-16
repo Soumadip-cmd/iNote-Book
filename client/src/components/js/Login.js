@@ -17,7 +17,7 @@ export default function Login() {
     let password = Array.isArray(login.password)
       ? login.password[0]
       : login.password;
-    const url = "http://localhost:8000/login";
+    const url = "https://inote-book-1.onrender.com/login";
     const response = await fetch(url, {
       method: "POST",
       headers: {
