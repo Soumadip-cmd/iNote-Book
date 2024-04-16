@@ -4,9 +4,8 @@
   "description": "This is iNotepad. Save your notes on cloud ",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build":"npm i",
-    "dev":"node index.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
+    
 
   },
   "author": "Soumadip",
