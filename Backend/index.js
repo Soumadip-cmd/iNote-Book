@@ -9,6 +9,9 @@ const app = express();
  
 app.use(cors())
 
+app.get("/",(req,res)=>{
+  res.send("hello boy")
+})
 app.use(require(path.join(__dirname, "routes/browse.js")));
 app.use(require(path.join(__dirname, "routes/fetchnote.js")));
 
