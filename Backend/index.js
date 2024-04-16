@@ -7,7 +7,11 @@ mongodbtoConnect();
 const port = 8000;
 const app = express();
  
-app.use(cors())
+app.use(cors({
+  origin:'https://i-note-book-frontend-theta.vercel.app'
+}
+  
+))
 
 app.get("/",(req,res)=>{
   res.send("hello boy")
