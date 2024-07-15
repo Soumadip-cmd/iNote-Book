@@ -1,0 +1,102 @@
+if i want to update note via routing then 
+EditNote.js will same as updatenote you did here but there for open modal you call updateNote() at the time map . 
+for roying you cant call this way there you have to do useEffect when page reload it will show that id wise data.
+---EditNote.js----
+import React, { useContext, useEffect, useState } from "react";
+import { useParams, useHistory } from "react-router-dom";
+import NoteContext from "../../context/NoteContext";
+
+export default function EditNote() {
+  const { id } = useParams();
+  const history = useHistory();
+  const {note, getNote, editNote } = useContext(NoteContext);
+  const [data, setData] = useState({ id: "", title: "", description: "", tag: "" });
+
+  useEffect(() => {
+    const notes = note.find((notes) => notes._id === id); // Find note from notes array by id
+    if (notes) {
+      setData({ id: notes._id, title: notes.title, description: notes.description, tag: notes.tag });
+    }
+  }, [id, note]);
+
+  const handleNote = () => {
+    editNote(data.id, data.title, data.description, data.tag);
+    history.push("/yournotes"); // Redirect to the notes list or any other desired route after updating
+  };
+
+  const onChange = (e) => {
+    setData({ ...data, [e.target.name]: e.target.value });
+  };
+
+  return (
+    <div className="container my-4">
+      <div className="mb-3">
+        <h2 className="txt">--Edit Your Note~~</h2>
+        <label>Title:</label>
+        <input
+          type="text"
+          className="form-control size"
+          style={{ fontSize: "21px", fontWeight: "bold" }}
+          placeholder="Write a Title"
+          name="title"
+          value={data.title}
+          onChange={onChange}
+          required
+        />
+        <br />
+        <label htmlFor="exampleFormControlTextarea1" className="form-label">
+          Description:
+        </label>
+        <textarea
+          className="form-control size"
+          id="notes"
+          rows="7"
+          placeholder="Enter Your Text --"
+          name="description"
+          value={data.description}
+          onChange={onChange}
+          style={{ fontSize: "21px", fontWeight: "bold" }}
+          required
+          minLength={3}
+        ></textarea>
+        <br />
+        <label>Tag:</label>
+        <select
+          className="form-control size"
+          style={{ fontSize: "21px", fontWeight: "bold", color: "black" }}
+          name="tag"
+          value={data.tag}
+          onChange={onChange}
+          required
+        >
+          <option value="General">General</option>
+          <option value="Private">Private</option>
+          <option value="Default">Default</option>
+        </select>
+        <div className="mx-3 my-3">
+          <button type="button" className="btn btn-primary mx-2" onClick={handleNote}>
+            Update Note
+          </button>
+          <button type="button" className="btn btn-secondary mx-1" onClick={() => setData({ id: "", title: "", description: "", tag: "" })}>
+            Clear Text
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+-----App.js-----
+
+ <Route exact path="/editNote/:id">
+    <EditNote/>
+</Route>
+
+only this 
+and at the svg you can do two things 1. Link 2. history.push()
+but there
+---let history = useHistory();
+
+  const updation = () => {
+    history.push(`/editNote/${note._id}`);
+  };
+  code 
