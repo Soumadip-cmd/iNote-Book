@@ -1,6 +1,11 @@
 if i want to update note via routing then 
 EditNote.js will same as updatenote you did here but there for open modal you call updateNote() at the time map . 
-for roying you cant call this way there you have to do useEffect when page reload it will show that id wise data.
+
+
+for roying you cant call this way there you have to do [{(useEffect)}] when page reload it will show that id wise data.
+
+
+
 ---EditNote.js----
 import React, { useContext, useEffect, useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
