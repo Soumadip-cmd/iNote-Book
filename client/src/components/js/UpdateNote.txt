@@ -5,6 +5,8 @@ EditNote.js will same as updatenote you did here but there for open modal you ca
 for roying you cant call this way there you have to do [{(useEffect)}] when page reload it will show that id wise data.
 
 
+without do mapping you have to use .find for finding the note
+
 
 ---EditNote.js----
 import React, { useContext, useEffect, useState } from "react";
